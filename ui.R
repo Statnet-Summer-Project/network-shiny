@@ -39,10 +39,10 @@ shinyUI(fluidPage(
                                             'kapferer','kapferer2','samplike'),
                                         selectize = FALSE),
                                     br(),
-                                    actionButton('goButton', 'Run'),
-                                    tags$hr(),
-                                    uiOutput('dynamiccolor'),
-                                    uiOutput('dynamicsize')))
+                                    actionButton('goButton', 'Run')))
+#                                    tags$hr(),
+#                                    uiOutput('dynamiccolor'),
+#                                    uiOutput('dynamicsize')))
                         )),
                     tabPanel('Layout',
                         fluidRow(
@@ -105,4 +105,7 @@ shinyUI(fluidPage(
         )
     )
 
+    
+    
+    
 
