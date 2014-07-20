@@ -120,7 +120,7 @@ shinyServer(
             if(is.null(input$net.ele) & is.null(input$net.eff)) return() else
             if(is.null(input$net.ele) & !is.null(input$net.eff)) arg.names.vec <- tmp[grep(input$net.eff,tmp)] else
             if(!is.null(input$net.ele) & is.null(input$net.eff)) arg.names.vec <- tmp[grep(input$net.ele,tmp)] else
-            if(!is.null(input$net.ele) & !is.null(input$net.eff))
+            ###if(!is.null(input$net.ele) & !is.null(input$net.eff))
               arg.names.vec <- intersect(tmp[grep(input$net.ele,tmp)],tmp[grep(input$net.eff,tmp)]) 
             arg.names.vec
           })
