@@ -1,17 +1,22 @@
+# TODO: Add comment
+# 
+# Author: kirk
+###############################################################################
+
 library(statnet)
 
 ########Jul 18, 2014######## UI function ########
 
 # function to generate dynamic ui for Type1
-UI_G1 <- function(){
-tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('para.",ct,"')",sep="",collapse="")))})
-tmp
+UI_G1 <- function(group=NULL){
+	tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('para_",group,".",ct,"')",sep="",collapse="")))})
+	tmp
 }
 
 # function to generate dynamic ui for Type2
 UI_G2 <- function(){
-  tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('paraT2.",ct,"')",sep="",collapse="")))})
-  tmp
+	tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('paraT2.",ct,"')",sep="",collapse="")))})
+	tmp
 }
 
 
@@ -21,15 +26,85 @@ testfn()
 network.arg.vec <- function()names(formals(plot.network.default))
 
 network.arg.vec.val <- function(){
-  tmp <- formals(plot.network.default)
-  tmp.class <- unlist(lapply(tmp,class))
-  tmp[tmp.class%in%c("call","character")] <- 
-      paste0("'",tmp[tmp.class%in%c("call","character")],"'")
-  tmp
+	tmp <- formals(plot.network.default)
+	tmp.class <- unlist(lapply(tmp,class))
+	tmp[tmp.class%in%c("call","character")] <- 
+			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
+	tmp
 }
-par.arg.vec <- function()names(par())
 
 #network.arg.vec()
 #network.arg.vec.val()
+par.arg.vec <- function()names(par())
 
+
+#para <- read.table("para.txt",header=TRUE)
+#save(para,file="para.RData")
+
+edge.para.vec <- para[para$tab=="edge","parameter"]
+vertex.para.vec <- para[para$tab=="vertex","parameter"]
+layout.para.vec <- para[para$tab=="layout","parameter"]
+generic.para.vec <- para[para$tab=="generic","parameter"]
+
+
+
+generic.arg.vec <- function()intersect(names(formals(plot.network.default)),generic.para.vec)
+
+generic.arg.vec.val <- function(){
+	tmp <- formals(plot.network.default)
+	tmp <- tmp[names(tmp) %in% generic.para.vec]
+	tmp.class <- unlist(lapply(tmp,class))
+	tmp[tmp.class%in%c("call","character")] <- 
+			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
+	tmp
+}
+
+generic.arg.vec.val()
+
+
+layout.arg.vec <- function()intersect(names(formals(plot.network.default)),layout.para.vec)
+
+layout.arg.vec.val <- function(){
+	tmp <- formals(plot.network.default)
+	tmp <- tmp[names(tmp) %in% layout.para.vec]
+	tmp.class <- unlist(lapply(tmp,class))
+	tmp[tmp.class%in%c("call","character")] <- 
+			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
+	tmp
+}
+
+layout.arg.vec.val()
+
+
+
+vertex.arg.vec <- function()intersect(names(formals(plot.network.default)),vertex.para.vec)
+
+vertex.arg.vec.val <- function(){
+	tmp <- formals(plot.network.default)
+	tmp <- tmp[names(tmp) %in% vertex.para.vec]
+	tmp.class <- unlist(lapply(tmp,class))
+	tmp[tmp.class%in%c("call","character")] <- 
+			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
+	tmp
+}
+
+vertex.arg.vec.val()
+
+
+
+edge.arg.vec <- function()intersect(names(formals(plot.network.default)),edge.para.vec)
+
+edge.arg.vec.val <- function(){
+	tmp <- formals(plot.network.default)
+	tmp <- tmp[names(tmp) %in% edge.para.vec]
+	tmp.class <- unlist(lapply(tmp,class))
+	tmp[tmp.class%in%c("call","character")] <- 
+			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
+	tmp
+}
+
+edge.arg.vec.val()
+
+#network.arg.vec()
+#network.arg.vec.val
 
