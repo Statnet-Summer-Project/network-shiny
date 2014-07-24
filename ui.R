@@ -13,6 +13,18 @@ source("functions.R")
 source("server.functions.R")
 source("ui.functions.R")
 
+UI_G1 <- function(group=NULL){
+ tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('para_",group,".",ct,"')",sep="",collapse="")))})
+ tmp
+}
+
+# function to generate dynamic ui for Type2
+UI_G2 <- function(){
+ tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('paraT2.",ct,"')",sep="",collapse="")))})
+ tmp
+}
+
+
 
 customTextInput<-function (inputId, label, value="",...) {
 	tagList(tags$label(label, `for` = inputId), tags$input(id = inputId,
