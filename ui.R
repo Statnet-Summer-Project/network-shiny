@@ -10,6 +10,10 @@ library(statnet)
 
 source("chooser.R")
 source("functions.R")
+source("server.functions.R")
+source("ui.functions.R")
+
+
 customTextInput<-function (inputId, label, value="",...) {
 	tagList(tags$label(label, `for` = inputId), tags$input(id = inputId,
 					type="text",
@@ -25,7 +29,7 @@ splitLayout(
 shinyUI(fluidPage(
 				titlePanel("network app"),
 				splitLayout( 
-						wellPanel(width=5, 
+						wellPanel(width=12, 
 								tabsetPanel(
 										tabPanel('Data',
 												fluidRow(
@@ -45,54 +49,66 @@ shinyUI(fluidPage(
 												fluidRow(
 														column(12,
 																wellPanel(
-#                                                                        actionButton('Type1',"Click to Use Type1"),
 																		chooserInput("mychooser_generic", "Available arguments", "Selected 
 																						metric",generic.arg.vec(), c(), size = 10, multiple = TRUE
 																		)),
-																wellPanel(
-                  h3("Parameter Value"),
-																		UI_G1("generic") # written in function.R
+                h3("Parameter Value"),
+#																wellPanel(
+                  column(5,
+																		UI_G1("generic")),
+                  column(1),
+                  column(6,
+                    verbatimTextOutput("exp_generic"))# written in function.R
 																)
-														))),
+														)),
 										tabPanel('Layout',
 												fluidRow(
-														column(12,
-																wellPanel(
-#                                                                        actionButton('Type1',"Click to Use Type1"),
-																		chooserInput("mychooser_layout", "Available arguments", "Selected 
-																						metric",layout.arg.vec(), c(), size = 10, multiple = TRUE
-																		)),
-																wellPanel(
-																		h3("Parameter Value"),
-																		UI_G1("layout") # written in function.R
-																)
-														))),
-										
+              column(12,
+                wellPanel(
+                  chooserInput("mychooser_layout", "Available arguments", "Selected 
+                      metric",layout.arg.vec(), c(), size = 10, multiple = TRUE
+                  )),
+                h3("Parameter Value"),
+#																wellPanel(
+                column(5,
+                  UI_G1("layout")),
+                column(1),
+                column(6,
+                  verbatimTextOutput("exp_layout"))# written in function.R
+              )
+            )),									
 										tabPanel('Vertex',
 												fluidRow(
-														column(12,
-																wellPanel(
-																		chooserInput("mychooser_vertex", leftLabel="Available arguments", rightLabel="Selected 
-																						arguments",vertex.arg.vec(), c(), size = 10, multiple = TRUE
-																		)),
-																wellPanel(
-																		h3("Parameter Value"),
-																		UI_G1("vertex") # written in function.R
-																)
-														))),
+              column(12,
+                wellPanel(
+                  chooserInput("mychooser_vertex", "Available arguments", "Selected 
+                      metric",vertex.arg.vec(), c(), size = 10, multiple = TRUE
+                  )),
+                h3("Parameter Value"),
+#																wellPanel(
+                column(5,
+                  UI_G1("vertex")),
+                column(1),
+                column(6,
+                  verbatimTextOutput("exp_vertex"))# written in function.R
+              )
+            )),
 										tabPanel('Edge',
 												fluidRow(
-														column(4,
-																wellPanel(
-#                                                                        actionButton('Type1',"Click to Use Type1"),
-																		chooserInput("mychooser_edge", "Available arguments", "Selected 
-																						metric",edge.arg.vec(), c(), size = 10, multiple = TRUE
-																		)),
-																wellPanel(
-																		h3("Parameter Value"),
-																		UI_G1("edge") # written in function.R
-																)
-														))),
+              column(12,
+                wellPanel(
+                  chooserInput("mychooser_edge", "Available arguments", "Selected 
+                      metric",edge.arg.vec(), c(), size = 10, multiple = TRUE
+                  )),
+                h3("Parameter Value"),
+#																wellPanel(
+                column(5,
+                  UI_G1("edge")),
+                column(1),
+                column(6,
+                  verbatimTextOutput("exp_edge"))# written in function.R
+              )
+            ))
 #          tabPanel('Graphical Parameter Type 1',
 #            fluidRow(
 #              column(4,
@@ -130,14 +146,19 @@ shinyUI(fluidPage(
 #              
 #              )
 #            )),
-										tabPanel('Save'))),
+								)),
+              
 						wellPanel(   
 								h4('Console Message'),
-								verbatimTextOutput('text'),	  
+								verbatimTextOutput('console'),	  
 								h4('Network Plot'),
 								plotOutput('nwplot'),
 								h4('Network Summary'),
-								uiOutput("attrUI"))
+								uiOutput("attrUI"),
+        uiOutput("servertest"),
+        h4('Diagnose Message'),
+        verbatimTextOutput('diag'),
+        downloadLink('downloadData', 'Download'))
 				),
 				
 				fluidRow(

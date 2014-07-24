@@ -1,0 +1,868 @@
+﻿##------ Jul 23, 2014, 1:15:18 PM ------##
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> source("/home/kirk/Dropbox/hiv_network/workspace/kk_utils/utils.R", echo=FALSE, encoding="UTF-8")
+> library(statnet)
+Loading required package: network
+network: Classes for Relational Data
+Version 1.10.2 created on 2014-06-12.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+                    Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Martina Morris, University of Washington
+                    Skye Bender-deMoll, University of Washington
+ For citation information, type citation("network").
+ Type help("network-package") to get started.
+
+Loading required package: ergm
+Loading required package: statnet.common
+
+ergm: version 3.1.2, created on 2014-01-30
+Copyright (c) 2014, Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Carter T. Butts, University of California -- Irvine
+                    Steven M. Goodreau, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Martina Morris, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("ergm").
+
+NOTE: If you use custom ERGM terms based on ‘ergm.userterms’ version
+prior to 3.1, you will need to perform a one-time update of the package
+boilerplate files (the files that you did not write or modify) from
+‘ergm.userterms’ 3.1 or later. See help('eut-upgrade') for
+instructions.
+
+NOTE: Dynamic network modeling functionality (STERGMs) has been moved
+to a new package, ‘tergm’.
+
+Loading required package: sna
+sna: Tools for Social Network Analysis
+Version 2.3-2 created on 2014-01-13.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+ For citation information, type citation("sna").
+ Type help(package="sna") to get started.
+
+
+Attaching package: ‘sna’
+
+The following object is masked from ‘package:network’:
+
+    %c%
+
+Loading required package: networkDynamic
+
+networkDynamic: version 0.6.3, created on 2014-02-27
+Copyright (c) 2014, Carter T. Butts, University of California -- Irvine
+                    Ayn Leslie-Cook, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Skye Bender-deMoll, University of Washington
+                    with contributions from
+                    Zack Almquist, University of California -- Irvine
+                    David R. Hunter, Penn State University
+                    Li Wang
+                    Kirk Li, University of Washington
+                    Steven M. Goodreau, University of Washington
+                    Martina Morris, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("networkDynamic").
+
+Loading required package: tergm
+
+tergm: version 3.1.4, created on 2014-01-16
+Copyright (c) 2014, Pavel N. Krivitsky, University of Wollongong
+                    Mark S. Handcock, University of California -- Los Angeles
+                    with contributions from
+                    David R. Hunter, Penn State University
+                    Steven M. Goodreau, University of Washington
+                    Martina Morris, University of Washington
+                    Nicole Bohme Carnegie, New York University
+                    Carter T. Butts, University of California -- Irvine
+                    Ayn Leslie-Cook, University of Washington
+                    Skye Bender-deMoll
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("tergm").
+
+Loading required package: ergm.count
+
+ergm.count: version 3.1.1, created on 2013-03-29
+Copyright (c) 2013, Pavel N. Krivitsky, University of Wollongong
+                    with contributions from
+                    Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("ergm.count").
+
+Loading required package: latentnet
+
+latentnet: version 2.5.1, created on 2014-02-17
+Copyright (c) 2014, Pavel N. Krivitsky, University of Wollongong
+                    Mark S. Handcock, University of California -- Los Angeles
+                    with contributions from
+                    Susan M. Shortreed
+                    Jeremy Tantrum
+                    Peter D. Hoff
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("latentnet").
+
+
+Attaching package: ‘latentnet’
+
+The following object is masked from ‘package:base’:
+
+    scale
+
+
+statnet: version 2014.2.0, created on 2014-02-05
+Copyright (c) 2014, Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Carter T. Butts, University of California -- Irvine
+                    Steven M. Goodreau, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Skye Bender-deMoll
+                    Martina Morris, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("statnet").
+
+> 
+> para <- read.table("para.txt",header=TRUE)
+> save(para,file="para.RData")
+>    data(para)
+Warning message:
+In data(para) : data set ‘para’ not found
+>    load("para.RData")
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> library(statnet)
+> library(shiny)
+> runApp()
+
+Listening on http://127.0.0.1:5495
+Error in func() : object 'string.use' not found
+Error in parse(text = string.use) : <text>:1:28: unexpected symbol
+1: c(metric.list.m_generic.1()metric.list.m_layout.1
+                               ^
+Error in parse(text = string.use) : <text>:1:28: unexpected symbol
+1: c(metric.list.m_generic.1()metric.list.m_layout.1
+                               ^
+Error in parse(text = paste("plot.network(nw", tmp, paste(plotlist, sep = ",",  : 
+  <text>:1:24: unexpected INCOMPLETE_STRING
+1: plot.network(nw , xlim=" )
+                           ^
+Error in x[0L] : object of type 'builtin' is not subsettable
+Error in parse(text = paste("plot.network(nw", tmp, paste(plotlist, sep = ",",  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw , xlim=c( )
+   ^
+Error in parse(text = paste("plot.network(nw", tmp, paste(plotlist, sep = ",",  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw , xlim=c(0 )
+   ^
+Error in parse(text = paste("plot.network(nw", tmp, paste(plotlist, sep = ",",  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw , xlim=c(0, )
+   ^
+Error in parse(text = paste("plot.network(nw", tmp, paste(plotlist, sep = ",",  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw , xlim=c(0,10 )
+   ^
+Error in parse(text = paste("plot.network(nw", tmp, paste(plotlist, sep = ",",  : 
+  <text>:1:24: unexpected INCOMPLETE_STRING
+1: plot.network(nw , xlab=" )
+                           ^
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:39: unexpected INCOMPLETE_STRING
+1: plot.network(nw,coord=coords() , ylab=" )
+                                          ^
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:39: unexpected INCOMPLETE_STRING
+1: plot.network(nw,coord=coords() , ylab="c )
+                                          ^
+Error in title(...) : 
+  cannot coerce type 'builtin' to vector of type 'character'
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:42: unexpected ')'
+1: plot.network(nw,coord=coords() , ylab=c) )
+                                             ^
+Error in title(...) : 
+  cannot coerce type 'builtin' to vector of type 'character'
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw,coord=coords() , ylab=c( )
+   ^
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw,coord=coords() , ylab=c(0 )
+   ^
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw,coord=coords() , ylab=c(0,1 )
+   ^
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  argument is missing, with no default
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  object 'yal' not found
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  object 'ylab' not found
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:40: unexpected ')'
+1: plot.network(nw,coord=coords() , ylab: )
+                                           ^
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:41: unexpected ')'
+1: plot.network(nw,coord=coords() , ylab:  )
+                                            ^
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:40: unexpected INCOMPLETE_STRING
+1: plot.network(nw,coord=coords() , ylab: " )
+                                           ^
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:40: unexpected INCOMPLETE_STRING
+1: plot.network(nw,coord=coords() , ylab: "cdd: )
+                                           ^
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  object 'ylab' not found
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:1:39: unexpected ':'
+1: plot.network(nw,coord=coords() , ylab=:
+                                          ^
+Error in title(...) : 
+  cannot coerce type 'builtin' to vector of type 'character'
+Error in parse(text = paste("plot.network(nw,coord=coords()", tmp, paste(plotlist,  : 
+  <text>:2:0: unexpected end of input
+1: plot.network(nw,coord=coords() , ylab=c( )
+   ^
+Error in tryCatchOne(expr, names, parentenv, handlers[[1L]]) : 
+  attempt to apply non-function
+Error in tryCatchOne(expr, names, parentenv, handlers[[1L]]) : 
+  attempt to apply non-function
+Error in plot.network.default(x, ...) : 
+  argument is missing, with no default
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  object 'ylab' not found
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  object 'yla' not found
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  object 'yl' not found
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  object 'y' not found
+Error in as.matrix.network.edgelist(x = x, attrname = attrname, ...) : 
+  argument is missing, with no default
+Error in x[0L] : object of type 'builtin' is not subsettable
+Error in options(error()) : could not find function "error"
+Error in options(error) : object 'error' not found
+Error in paste("URL does not seem to exist:", url) : 
+  cannot coerce type 'closure' to vector of type 'character'
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:2:66: unexpected ')'
+1: tryCatch(plot.network(nw,coord=coords()   ),error=function(cond) {
+2:                                                         message())
+                                                                    ^
+test
+
+> (Command cancelled)
+> 
+> 
+> #
+> #if (!require("devtools"))
+> #  install.packages("devtools")
+> #devtools::install_github("rstudio/shinyapps")
+> ##
+> #library(shinyapps)
+> #deployApp()
+> ##
+> help("suppressErrors")
+No documentation for ‘suppressErrors’ in specified packages and libraries:
+you could try ‘??suppressErrors’
+> (Command cancelled)
+
+> (Command cancelled)
+
+> (Command cancelled)
+
+> (Command cancelled)
+
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> library(statnet)
+> library(shiny)
+> runApp()
+
+Listening on http://127.0.0.1:5495
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return(NA)
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return(NA)
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return(NA)
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return(NA)
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return(NA)
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return(NA)
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return()
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return(NA)
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return()
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return()
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return()
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:5:0: unexpected end of input
+3:                                                                                                                 return()
+4:                                                                                                                 })
+  ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(plot.network(nw,coord=coords() , xlim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(plot.network(nw,coord=coords() , xlim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(expr=plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(expr=plot.network(nw,coord=coords() , ylim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(expr=plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(expr=plot.network(nw,coord=coords() , ylim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(expr=plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(expr=plot.network(nw,coord=coords() , ylim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(expr=plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(expr=plot.network(nw,coord=coords() , ylim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(expr=plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(expr=plot.network(nw,coord=coords() , ylim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(expr=plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(expr=plot.network(nw,coord=coords() , ylim=c( ),error=function(cond) {print('test')})
+   ^
+Error in parse(text = paste("tryCatch(expr=plot.network(nw,coord=coords()",  : 
+  <text>:2:0: unexpected end of input
+1: tryCatch(expr=plot.network(nw,coord=coords() , ylim=c( ),error=function(cond) {print('test')})
+   ^
+Error in rj:::.statet.extSource(if (!from_file) { : 
+  /home/kirk/Dropbox/hiv_network/workspace/network-shiny/ui.R:159:0: unexpected end of input
+157: 
+158: 
+    ^
+Error in tag("div", list(...)) : object 'output' not found
+Error in rj:::.statet.extSource(if (!from_file) { : 
+  /home/kirk/Dropbox/hiv_network/workspace/network-shiny/ui.R:157:0: unexpected end of input
+155: 
+156: 
+    ^
+Error in tag("div", list(...)) : object 'attrUI' not found
+Error in tag("div", list(...)) : object 'output' not found
+Error in tag("div", list(...)) : object 'attrUI' not found
+Error in tag("div", list(...)) : object 'attrUI' not found
+Error in tag("div", list(...)) : object 'attrUI' not found
+Error in tag("div", list(...)) : object 'attrUI' not found
+
+> (Command cancelled)
+> 
+> 
+> #
+> #if (!require("devtools"))
+> #  install.packages("devtools")
+> #devtools::install_github("rstudio/shinyapps")
+> ##
+> #library(shinyapps)
+> #deployApp()
+> ##
+> 		paste("tryCatch(plot.network(nw,coord=coords()","),error=function(cond) {
++ 					print('test')
++ 					return()
++ 				})")
+[1] "tryCatch(plot.network(nw,coord=coords() ),error=function(cond) {\n\t\t\t\t\tprint('test')\n\t\t\t\t\treturn()\n\t\t\t\t})"
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> library(statnet)
+> library(shiny)
+> runApp()
+
+Listening on http://127.0.0.1:5495
+Error in tag("div", list(...)) : object 'attrUI' not found
+Error in rj:::.statet.extSource(if (!from_file) { : 
+  /home/kirk/Dropbox/hiv_network/workspace/network-shiny/server.R:344:0: unexpected end of input
+342: 
+343: 
+    ^
+Error in chooserInput("mychooser_vertex", label = "Available arguments",  : 
+  unused argument (label = "Available arguments")
+
+> (Command cancelled)
+> 
+> 
+> #
+> #if (!require("devtools"))
+> #  install.packages("devtools")
+> #devtools::install_github("rstudio/shinyapps")
+> ##
+> #library(shinyapps)
+> #deployApp()
+> ##
+> help("uiOutput")
+> help("chooserInput")
+No documentation for ‘chooserInput’ in specified packages and libraries:
+you could try ‘??chooserInput’
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> library(statnet)
+> library(shiny)
+> runApp()
+
+Listening on http://127.0.0.1:5495
+
+> (Command cancelled)
+> 
+> 
+> #
+> #if (!require("devtools"))
+> #  install.packages("devtools")
+> #devtools::install_github("rstudio/shinyapps")
+> ##
+> #library(shinyapps)
+> #deployApp()
+> ##
+> RdTextFilter("item")
+Error: could not find function "RdTextFilter"
+> help("do.call")
+>     eval(call(renderParaInputUI))
+Error in eval(call(renderParaInputUI)) : 
+  object 'renderParaInputUI' not found
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> 
+> library(statnet)
+> 
+> ########Jul 18, 2014######## Server function ########
+> network.arg.vec <- function()names(formals(plot.network.default))
+> 
+> network.arg.vec.val <- function(){
++ 	tmp <- formals(plot.network.default)
++ 	tmp.class <- unlist(lapply(tmp,class))
++ 	tmp[tmp.class%in%c("call","character")] <- 
++ 			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
++ 	tmp
++ }
+> 
+> #network.arg.vec()
+> #network.arg.vec.val()
+> par.arg.vec <- function()names(par())
+> 
+> 
+> #para <- read.table("para.txt",header=TRUE)
+> #save(para,file="para.RData")
+> load("para.RData")
+> edge.para.vec <- para[para$tab=="edge","parameter"]
+> vertex.para.vec <- para[para$tab=="vertex","parameter"]
+> layout.para.vec <- para[para$tab=="layout","parameter"]
+> generic.para.vec <- para[para$tab=="generic","parameter"]
+> 
+> 
+> 
+> generic.arg.vec <- function()intersect(names(formals(plot.network.default)),generic.para.vec)
+> 
+> generic.arg.vec.val <- function(){
++ 	tmp <- formals(plot.network.default)
++ 	tmp <- tmp[names(tmp) %in% generic.para.vec]
++ 	tmp.class <- unlist(lapply(tmp,class))
++ 	tmp[tmp.class%in%c("call","character")] <- 
++ 			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
++ 	tmp
++ }
+> 
+> generic.arg.vec.val()
+$xlab
+NULL
+
+$ylab
+NULL
+
+$xlim
+NULL
+
+$ylim
+NULL
+
+$suppress.axes
+[1] TRUE
+
+$new
+[1] TRUE
+
+> 
+> 
+> layout.arg.vec <- function()intersect(names(formals(plot.network.default)),layout.para.vec)
+> 
+> layout.arg.vec.val <- function(){
++ 	tmp <- formals(plot.network.default)
++ 	tmp <- tmp[names(tmp) %in% layout.para.vec]
++ 	tmp.class <- unlist(lapply(tmp,class))
++ 	tmp[tmp.class%in%c("call","character")] <- 
++ 			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
++ 	tmp
++ }
+> 
+> layout.arg.vec.val()
+$coord
+NULL
+
+$jitter
+[1] TRUE
+
+$thresh
+[1] 0
+
+$mode
+[1] "'fruchtermanreingold'"
+
+$displayisolates
+[1] TRUE
+
+$interactive
+[1] FALSE
+
+$pad
+[1] 0.2
+
+$label.pad
+[1] 0.5
+
+$object.scale
+[1] 0.01
+
+$vertices.last
+[1] TRUE
+
+$layout.par
+NULL
+
+> 
+> 
+> 
+> vertex.arg.vec <- function()intersect(names(formals(plot.network.default)),vertex.para.vec)
+> 
+> vertex.arg.vec.val <- function(){
++ 	tmp <- formals(plot.network.default)
++ 	tmp <- tmp[names(tmp) %in% vertex.para.vec]
++ 	tmp.class <- unlist(lapply(tmp,class))
++ 	tmp[tmp.class%in%c("call","character")] <- 
++ 			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
++ 	tmp
++ }
+> 
+> vertex.arg.vec.val()
+$label
+[1] "'network.vertex.names(x)'"
+
+$displaylabels
+[1] "'!missing(label)'"
+
+$boxed.labels
+[1] FALSE
+
+$label.pos
+[1] 0
+
+$label.bg
+[1] "'white'"
+
+$vertex.sides
+[1] 50
+
+$vertex.rot
+[1] 0
+
+$vertex.lwd
+[1] 1
+
+$label.cex
+[1] 1
+
+$vertex.cex
+[1] 1
+
+$label.col
+[1] 1
+
+$vertex.col
+[1] 2
+
+$label.border
+[1] 1
+
+$vertex.border
+[1] 1
+
+$label.lty
+NULL
+
+$vertex.lty
+[1] 1
+
+$label.lwd
+[1] "'par(\"lwd\")'"
+
+> 
+> 
+> 
+> edge.arg.vec <- function()intersect(names(formals(plot.network.default)),edge.para.vec)
+> 
+> edge.arg.vec.val <- function(){
++ 	tmp <- formals(plot.network.default)
++ 	tmp <- tmp[names(tmp) %in% edge.para.vec]
++ 	tmp.class <- unlist(lapply(tmp,class))
++ 	tmp[tmp.class%in%c("call","character")] <- 
++ 			paste0("'",tmp[tmp.class%in%c("call","character")],"'")
++ 	tmp
++ }
+> 
+> edge.arg.vec.val()
+$attrname
+NULL
+
+$usearrows
+[1] TRUE
+
+$arrowhead.cex
+[1] 1
+
+$loop.cex
+[1] 1
+
+$edge.col
+[1] 1
+
+$edge.lty
+[1] 1
+
+$edge.lwd
+[1] 0
+
+$edge.label
+NULL
+
+$edge.label.cex
+[1] 1
+
+$edge.label.col
+[1] 1
+
+$edge.len
+[1] 0.5
+
+$edge.curve
+[1] 0.1
+
+$edge.steps
+[1] 50
+
+$loop.steps
+[1] 20
+
+$uselen
+[1] FALSE
+
+$usecurve
+[1] FALSE
+
+> 
+> 
+> 
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> 
+> renderParaInputUI <- function(){
++ metric.list_generic <- reactive({
++    if(input$goButton==0)return()
++    if(length(input$mychooser_generic$right)>=1)
++     input$mychooser_generic$right
++    else return()
++   })
++ 
++ 
++ ct=1:12
++ eval(parse(text=paste0("output$para_generic.",ct," <- renderUI({
++         if(length(input$mychooser_generic$right)>= ",ct," ){
++         count <- ",ct,"
++         inputId = eval(parse(text=paste0('\"para_generic.',count,'\"')))
++         label= eval(parse(text=paste0('paste0(metric.list_generic()[',count,'],\":\")')))
++         value= eval(parse(text=paste0('paste0(metric.list_generic()[',count,'],\"=\",generic.arg.vec.val()[metric.list_generic()[[',count,']]],collapse=\"\n\")')))
++         if(nchar(value)>=2 & length(value)>0) # colum sign 
++         inputTextarea(inputId,label,value,nrow=5,ncol=10)
++         else return()
++         }
++         else return()
++         })")))
++ }
+>     eval(call(renderParaInputUI))
+Error in call(renderParaInputUI) : 
+  first argument must be a character string
+>     eval(call(renderParaInputUI,""))
+Error in call(renderParaInputUI, "") : 
+  first argument must be a character string
+>     eval(call("renderParaInputUI",""))
+Error in renderParaInputUI("") : unused argument ("")
+>     eval(call("renderParaInputUI"))
+Error in output$para_generic.1 <- renderUI({ : object 'output' not found
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> library(statnet)
+> library(shiny)
+> runApp()
+
+Listening on http://127.0.0.1:5495
+Error in output$para_generic.1 <- renderUI({ : object 'output' not found
+Error in output$para_generic.1 <- renderUI({ : object 'output' not found
+Error in tag("div", list(...)) : argument is missing, with no default
+Error in tag("div", list(...)) : argument is missing, with no default
+Error in tag("div", list(...)) : argument is missing, with no default
+Error in output$para_generic.1 <- renderUI({ : object 'output' not found
+Error in eval(call("renderParaInputUI"), pf) : 
+  invalid 'envir' argument of type 'closure'
+Error in .getReactiveEnvironment()$currentContext() : 
+  Operation not allowed without an active reactive context. (You tried to do something that can only be done from inside a reactive expression or observer.)
+Error in output$para_generic.1 <- renderUI({ : object 'output' not found
+Error in eval(call("renderParaInputUI", envir = )) : 
+  argument is missing, with no default
+Error in eval(call("renderParaInputUI", envir = tt)) : 
+  object 'tt' not found
+Error in output$para_generic.1 <- renderUI({ : object 'output' not found
+Error in .getReactiveEnvironment()$currentContext() : 
+  Operation not allowed without an active reactive context. (You tried to do something that can only be done from inside a reactive expression or observer.)
+
+> (Command cancelled)
+> 
+> 
+> #
+> #if (!require("devtools"))
+> #  install.packages("devtools")
+> #devtools::install_github("rstudio/shinyapps")
+> ##
+> #library(shinyapps)
+> #deployApp()
+> ##
+> help("eval")
+> help("eval")
+> help("eval")
+> (Command cancelled)
+
+> (Command cancelled)
+
+> (Command cancelled)
+
+> (Command cancelled)
+
+> (Command cancelled)
+
+> # TODO: Add comment
+> # 
+> # Author: kirk
+> ###############################################################################
+> library(statnet)
+> library(shiny)
+> runApp()
+
+Listening on http://127.0.0.1:5495
+Error in .getReactiveEnvironment()$currentContext() : 
+  Operation not allowed without an active reactive context. (You tried to do something that can only be done from inside a reactive expression or observer.)
+Error in .getReactiveEnvironment()$currentContext() : 
+  Operation not allowed without an active reactive context. (You tried to do something that can only be done from inside a reactive expression or observer.)
+Error in (structure(function (input, output)  : 
+  could not find function "textfnserver"
+Error in output$servertest <- renderUI({ : object 'output' not found
+Error in output$servertest <- renderUI({ : object 'output' not found
+Error in pf() : argument "q" is missing, with no default
+Error in .getReactiveEnvironment()$currentContext() : 
+  Operation not allowed without an active reactive context. (You tried to do something that can only be done from inside a reactive expression or observer.)
+Error in output$servertest <- renderUI({ : object 'output' not found
+Error in output$servertest <- renderUI({ : object 'output' not found
+Error in output$servertest <- renderUI({ : object 'output' not found
+Error in output$servertest <- renderUI({ : object 'output' not found
+Error in eval(parse(text = "output$servertest <- renderUI({\n    h3(\"fdsaaafasdffds\")\n   })"),  : 
+  numeric 'envir' arg not of length one
+
+[INFO] Jul 23, 2014, 5:58:42 PM - R stopped.

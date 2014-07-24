@@ -5,23 +5,6 @@
 
 library(statnet)
 
-########Jul 18, 2014######## UI function ########
-
-# function to generate dynamic ui for Type1
-UI_G1 <- function(group=NULL){
-	tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('para_",group,".",ct,"')",sep="",collapse="")))})
-	tmp
-}
-
-# function to generate dynamic ui for Type2
-UI_G2 <- function(){
-	tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('paraT2.",ct,"')",sep="",collapse="")))})
-	tmp
-}
-
-
-testfn <- function()  titlePanel("network app")
-testfn()
 ########Jul 18, 2014######## Server function ########
 network.arg.vec <- function()names(formals(plot.network.default))
 
@@ -40,7 +23,7 @@ par.arg.vec <- function()names(par())
 
 #para <- read.table("para.txt",header=TRUE)
 #save(para,file="para.RData")
-
+load("para.RData")
 edge.para.vec <- para[para$tab=="edge","parameter"]
 vertex.para.vec <- para[para$tab=="vertex","parameter"]
 layout.para.vec <- para[para$tab=="layout","parameter"]
@@ -105,6 +88,5 @@ edge.arg.vec.val <- function(){
 
 edge.arg.vec.val()
 
-#network.arg.vec()
-#network.arg.vec.val
+
 

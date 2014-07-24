@@ -2,7 +2,7 @@
 # 
 # Author: KirkLi
 ###############################################################################
-inputTextarea <- function(inputId,  label="",value="", nrows=10, ncols=10) {
+inputTextarea <- function(inputId,  label="",value="", nrows=3, ncols=5) {
   tagList(
       singleton(tags$head(tags$script(src = "textarea.js"))),
       tags$label(label, `for` = inputId),

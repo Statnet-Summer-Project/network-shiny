@@ -1,0 +1,196 @@
+﻿##------ Jul 17, 2014, 5:12:07 PM ------##
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> source("/home/kirk/Dropbox/hiv_network/workspace/kk_utils/utils.R", echo=FALSE, encoding="UTF-8")
+> 
+> library(statnet)
+Loading required package: network
+network: Classes for Relational Data
+Version 1.10.2 created on 2014-06-12.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+                    Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Martina Morris, University of Washington
+                    Skye Bender-deMoll, University of Washington
+ For citation information, type citation("network").
+ Type help("network-package") to get started.
+
+Loading required package: ergm
+Loading required package: statnet.common
+
+ergm: version 3.1.2, created on 2014-01-30
+Copyright (c) 2014, Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Carter T. Butts, University of California -- Irvine
+                    Steven M. Goodreau, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Martina Morris, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("ergm").
+
+NOTE: If you use custom ERGM terms based on ‘ergm.userterms’ version
+prior to 3.1, you will need to perform a one-time update of the package
+boilerplate files (the files that you did not write or modify) from
+‘ergm.userterms’ 3.1 or later. See help('eut-upgrade') for
+instructions.
+
+NOTE: Dynamic network modeling functionality (STERGMs) has been moved
+to a new package, ‘tergm’.
+
+Loading required package: sna
+sna: Tools for Social Network Analysis
+Version 2.3-2 created on 2014-01-13.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+ For citation information, type citation("sna").
+ Type help(package="sna") to get started.
+
+
+Attaching package: ‘sna’
+
+The following object is masked from ‘package:network’:
+
+    %c%
+
+Loading required package: networkDynamic
+
+networkDynamic: version 0.6.3, created on 2014-02-27
+Copyright (c) 2014, Carter T. Butts, University of California -- Irvine
+                    Ayn Leslie-Cook, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Skye Bender-deMoll, University of Washington
+                    with contributions from
+                    Zack Almquist, University of California -- Irvine
+                    David R. Hunter, Penn State University
+                    Li Wang
+                    Kirk Li, University of Washington
+                    Steven M. Goodreau, University of Washington
+                    Martina Morris, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("networkDynamic").
+
+Loading required package: tergm
+
+tergm: version 3.1.4, created on 2014-01-16
+Copyright (c) 2014, Pavel N. Krivitsky, University of Wollongong
+                    Mark S. Handcock, University of California -- Los Angeles
+                    with contributions from
+                    David R. Hunter, Penn State University
+                    Steven M. Goodreau, University of Washington
+                    Martina Morris, University of Washington
+                    Nicole Bohme Carnegie, New York University
+                    Carter T. Butts, University of California -- Irvine
+                    Ayn Leslie-Cook, University of Washington
+                    Skye Bender-deMoll
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("tergm").
+
+Loading required package: ergm.count
+
+ergm.count: version 3.1.1, created on 2013-03-29
+Copyright (c) 2013, Pavel N. Krivitsky, University of Wollongong
+                    with contributions from
+                    Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("ergm.count").
+
+Loading required package: latentnet
+
+latentnet: version 2.5.1, created on 2014-02-17
+Copyright (c) 2014, Pavel N. Krivitsky, University of Wollongong
+                    Mark S. Handcock, University of California -- Los Angeles
+                    with contributions from
+                    Susan M. Shortreed
+                    Jeremy Tantrum
+                    Peter D. Hoff
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("latentnet").
+
+
+Attaching package: ‘latentnet’
+
+The following object is masked from ‘package:base’:
+
+    scale
+
+
+statnet: version 2014.2.0, created on 2014-02-05
+Copyright (c) 2014, Mark S. Handcock, University of California -- Los Angeles
+                    David R. Hunter, Penn State University
+                    Carter T. Butts, University of California -- Irvine
+                    Steven M. Goodreau, University of Washington
+                    Pavel N. Krivitsky, University of Wollongong
+                    Skye Bender-deMoll
+                    Martina Morris, University of Washington
+Based on "statnet" project software (statnet.org).
+For license and citation information see statnet.org/attribution
+or type citation("statnet").
+
+> 
+> ?plot.network
+> 
+> network.arg.vec <- names(formals(plot.network.default))
+> 
+> par.arg.vec <- names(par())
+> 
+> network.arg.vec
+ [1] "x"               "attrname"        "label"           "coord"          
+ [5] "jitter"          "thresh"          "usearrows"       "mode"           
+ [9] "displayisolates" "interactive"     "xlab"            "ylab"           
+[13] "xlim"            "ylim"            "pad"             "label.pad"      
+[17] "displaylabels"   "boxed.labels"    "label.pos"       "label.bg"       
+[21] "vertex.sides"    "vertex.rot"      "vertex.lwd"      "arrowhead.cex"  
+[25] "label.cex"       "loop.cex"        "vertex.cex"      "edge.col"       
+[29] "label.col"       "vertex.col"      "label.border"    "vertex.border"  
+[33] "edge.lty"        "label.lty"       "vertex.lty"      "edge.lwd"       
+[37] "edge.label"      "edge.label.cex"  "edge.label.col"  "label.lwd"      
+[41] "edge.len"        "edge.curve"      "edge.steps"      "loop.steps"     
+[45] "object.scale"    "uselen"          "usecurve"        "suppress.axes"  
+[49] "vertices.last"   "new"             "layout.par"      "..."            
+> print
+function (x, ...) 
+UseMethod("print")
+<bytecode: 0x7fd38b436748>
+<environment: namespace:base>
+> print
+function (x, ...) 
+UseMethod("print")
+<bytecode: 0x7fd38b436748>
+<environment: namespace:base>
+> print
+function (x, ...) 
+UseMethod("print")
+<bytecode: 0x7fd38b436748>
+<environment: namespace:base>
+> print
+function (x, ...) 
+UseMethod("print")
+<bytecode: 0x7fd38b436748>
+<environment: namespace:base>
+> print
+function (x, ...) 
+UseMethod("print")
+<bytecode: 0x7fd38b436748>
+<environment: namespace:base>

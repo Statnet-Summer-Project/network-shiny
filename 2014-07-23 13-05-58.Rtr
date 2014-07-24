@@ -1,0 +1,96 @@
+﻿##------ Jul 23, 2014, 1:05:58 PM ------##
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> source("/home/kirk/Dropbox/hiv_network/workspace/kk_utils/utils.R", echo=FALSE, encoding="UTF-8")
+> paraxls <- read.table("para.txt")
+> paraxls
+                V1      V2
+1        parameter     tab
+2         attrname    edge
+3        usearrows    edge
+4    arrowhead.cex    edge
+5         loop.cex    edge
+6         edge.col    edge
+7         edge.lty    edge
+8         edge.lwd    edge
+9       edge.label    edge
+10  edge.label.cex    edge
+11  edge.label.col    edge
+12        edge.len    edge
+13      edge.curve    edge
+14      edge.steps    edge
+15      loop.steps    edge
+16          uselen    edge
+17        usecurve    edge
+18            xlab generic
+19            ylab generic
+20            xlim generic
+21            ylim generic
+22   suppress.axes generic
+23             new generic
+24           coord  layout
+25          jitter  layout
+26          thresh  layout
+27            mode  layout
+28 displayisolates  layout
+29     interactive  layout
+30             pad  layout
+31       label.pad  layout
+32    object.scale  layout
+33   vertices.last  layout
+34      layout.par  layout
+35           label  vertex
+36   displaylabels  vertex
+37    boxed.labels  vertex
+38       label.pos  vertex
+39        label.bg  vertex
+40    vertex.sides  vertex
+41      vertex.rot  vertex
+42      vertex.lwd  vertex
+43       label.cex  vertex
+44      vertex.cex  vertex
+45       label.col  vertex
+46      vertex.col  vertex
+47    label.border  vertex
+48   vertex.border  vertex
+49       label.lty  vertex
+50      vertex.lty  vertex
+51       label.lwd  vertex
+> paraxls <- read.table("para.txt",header=TRUE)
+> 
+> 
+> edge.para.vec <- paraxls[paraxls$tab=="edge","parameter"]
+> vertex.para.vec <- paraxls[paraxls$tab=="vertex","parameter"]
+> layout.para.vec <- paraxls[paraxls$tab=="layout","parameter"]
+> generic.para.vec <- paraxls[paraxls$tab=="generic","parameter"]
+> 
+> edge.para.vec 
+ [1] attrname       usearrows      arrowhead.cex  loop.cex       edge.col      
+ [6] edge.lty       edge.lwd       edge.label     edge.label.cex edge.label.col
+[11] edge.len       edge.curve     edge.steps     loop.steps     uselen        
+[16] usecurve      
+50 Levels: arrowhead.cex attrname boxed.labels coord ... ylim
+> save(para,file="para.RData")
+Error in save(para, file = "para.RData") : object ‘para’ not found
+> para <- read.table("para.txt",header=TRUE)
+> save(para,file="para.RData")
+> generic.arg.vec <- function()intersect(names(formals(plot.network.default)),generic.para.vec)
+> generic.arg.vec.val()
+Error: could not find function "generic.arg.vec.val"
