@@ -12,6 +12,7 @@ runApp()
 #  install.packages("devtools")
 #devtools::install_github("rstudio/shinyapps")
 ##
-#library(shinyapps)
-#deployApp()
-##
+library(shinyapps)
+deployApp()
+
+
