@@ -5,8 +5,6 @@
 library(shiny)
 library(statnet)
 source("functions.R")
-source("server.functions.R")
-source("ui.functions.R")
 
 shinyServer(
   function(input, output){

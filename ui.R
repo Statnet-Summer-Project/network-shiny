@@ -10,8 +10,6 @@ library(statnet)
 
 source("chooser.R")
 source("functions.R")
-source("server.functions.R")
-source("ui.functions.R")
 
 UI_G1 <- function(group=NULL){
  tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('para_",group,".",ct,"')",sep="",collapse="")))})
