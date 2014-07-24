@@ -9,5 +9,5 @@ or
 
 ```
 library(shiny)
-runGitHub("ergm-shiny","Statnet-Summer-Project")
+runGitHub("network-shiny","Statnet-Summer-Project")
 ```
