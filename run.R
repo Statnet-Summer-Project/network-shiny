@@ -18,4 +18,4 @@ deployApp()
 #
 #runGitHub("ergm-shiny","Statnet-Summer-Project")
 
-package.skeleton(name = "PAenhance")
+package.skeleton(name = "network-shiny")
