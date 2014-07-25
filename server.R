@@ -3,12 +3,12 @@
 # Author: kirk
 ###############################################################################
 library(shiny)
-library(statnet)
+library(network)
+library(shinyData)
 source("functions.R")
 
 shinyServer(
   function(input, output){
-   
    #load datasets
    data(ecoli)
    data(florentine)
@@ -16,8 +16,8 @@ shinyServer(
    data(faux.mesa.high)
    data(kapferer)
    data(sampson)
-   load("para.RData")
-   load("plotnetworkExp.RData")
+   data(para)
+   data(plotnetworkExp)
    nw.reac <- reactive({
       if(input$goButton==0)return()
       input$goButton
@@ -347,7 +347,6 @@ shinyServer(
    output$exp_edge <- renderPrint({
       expFun_edge()
      })
-   
    output$diag <- renderPrint({
 #      	()
      })
@@ -384,10 +383,6 @@ shinyServer(
       printPlot()
      })
    
-   
-   printPlot2 <- reactive({
-      plot(network(10))
-     })
    #summary of network attributes
    
    output$attrUI <- renderUI({
@@ -396,14 +391,13 @@ shinyServer(
        verbatimTextOutput('attr')}
      })
    
-   
-   output$attr <- renderPrint({
-#						if (input$goButton == 0){
-#							return(cat('Please choose a sample dataset from the side panel'))
-#						}
-      nw <- isolate(nw.reac())
-      return(nw)
-     })
+#   output$attr <- renderPrint({
+##						if (input$goButton == 0){
+##							return(cat('Please choose a sample dataset from the side panel'))
+##						}
+#      nw <- isolate(nw.reac())
+#      return(nw)
+#     })
    
    output$downloadData<- downloadHandler(
      filename = function() {

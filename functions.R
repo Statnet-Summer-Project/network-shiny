@@ -4,7 +4,7 @@
 ###############################################################################
 
 library(statnet)
-
+library(shinyData)
 ########Jul 18, 2014######## Server function ########
 network.arg.vec <- function()names(formals(plot.network.default))
 
@@ -18,12 +18,10 @@ network.arg.vec.val <- function(){
 
 #network.arg.vec()
 #network.arg.vec.val()
-par.arg.vec <- function()names(par())
-
-
 #para <- read.table("para.txt",header=TRUE)
 #save(para,file="para.RData")
-load("para.RData")
+
+data(para)
 edge.para.vec <- para[para$tab=="edge","parameter"]
 vertex.para.vec <- para[para$tab=="vertex","parameter"]
 layout.para.vec <- para[para$tab=="layout","parameter"]
@@ -42,8 +40,6 @@ generic.arg.vec.val <- function(){
 	tmp
 }
 
-generic.arg.vec.val()
-
 
 layout.arg.vec <- function()intersect(names(formals(plot.network.default)),layout.para.vec)
 
@@ -56,10 +52,6 @@ layout.arg.vec.val <- function(){
 	tmp
 }
 
-layout.arg.vec.val()
-
-
-
 vertex.arg.vec <- function()intersect(names(formals(plot.network.default)),vertex.para.vec)
 
 vertex.arg.vec.val <- function(){
@@ -71,7 +63,6 @@ vertex.arg.vec.val <- function(){
 	tmp
 }
 
-vertex.arg.vec.val()
 
 
 
@@ -86,7 +77,6 @@ edge.arg.vec.val <- function(){
 	tmp
 }
 
-edge.arg.vec.val()
 
 
 

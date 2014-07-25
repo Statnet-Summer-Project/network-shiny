@@ -2,12 +2,8 @@
 # 
 # Author: kirk
 ###############################################################################
-
-#ergm-common
-#ui.R
 library(shiny)
-library(statnet)
-
+library(network)
 source("chooser.R")
 source("functions.R")
 
@@ -22,19 +18,11 @@ UI_G2 <- function(){
  tmp
 }
 
-
-
 customTextInput<-function (inputId, label, value="",...) {
 	tagList(tags$label(label, `for` = inputId), tags$input(id = inputId,
 					type="text",
 					value=value,...))
 }
-
-splitLayout(
-		plotOutput("plot1"),
-		plotOutput("plot2")
-)
-
 
 shinyUI(fluidPage(
 				titlePanel("network app"),
@@ -175,10 +163,6 @@ shinyUI(fluidPage(
 						column(1, img(src = 'csdelogo_crop.png', height = 50, width = 50)),
 						column(2, h6('Center for Studies in Demography and Ecology'))
 				)
-		
-		
-		
-		
 		)
 )
 
