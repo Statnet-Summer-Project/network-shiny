@@ -4,6 +4,7 @@
 ###############################################################################
 library(shiny)
 library(network)
+library(ergm)
 library(shinyData)
 source("functions.R")
 
@@ -18,6 +19,8 @@ shinyServer(
    data(sampson)
    data(para)
    data(plotnetworkExp)
+   
+   
    nw.reac <- reactive({
       if(input$goButton==0)return()
       input$goButton
@@ -405,7 +408,14 @@ shinyServer(
      },
      content = function(file) { 
       jpeg(file)
-      plot(network(10))
+      input$goButton
+      nw <- isolate({nw.reac()})
+      plotlist <- argFun()
+      #only add , if there is argument after nw
+      tmp <- if(length(plotlist)){","}
+      # add error handler
+      tryCatch(eval(parse(text=paste("tryCatch(expr=plot.network(nw,coord=coords()",tmp,paste(plotlist,sep=",",collapse=","),"),error=function(cond) {cat('Input value is invalid')})")
+          )),error=function(e)cat("Input format is invalid"))
       dev.off()
      },contentType="image/png")
    

@@ -4,63 +4,65 @@
 ###############################################################################
 library(shiny)
 library(network)
+library(ergm)
 source("chooser.R")
 source("functions.R")
 
+# write uiOutput for Modifying parameter value. 
 UI_G1 <- function(group=NULL){
- tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('para_",group,".",ct,"')",sep="",collapse="")))})
+ tmp <- lapply(1:12,function(ct) {eval(parse(text=paste("uiOutput('para_",group,".",ct,"')",sep="",collapse="")))})
  tmp
 }
 
 # function to generate dynamic ui for Type2
-UI_G2 <- function(){
- tmp <- lapply(1:50,function(ct) {eval(parse(text=paste("uiOutput('paraT2.",ct,"')",sep="",collapse="")))})
- tmp
-}
+#UI_G2 <- function(){
+# tmp <- lapply(1:12,function(ct) {eval(parse(text=paste("uiOutput('paraT2.",ct,"')",sep="",collapse="")))})
+# tmp
+#}
 
 customTextInput<-function (inputId, label, value="",...) {
-	tagList(tags$label(label, `for` = inputId), tags$input(id = inputId,
-					type="text",
-					value=value,...))
+ tagList(tags$label(label, `for` = inputId), tags$input(id = inputId,
+     type="text",
+     value=value,...))
 }
 
 shinyUI(fluidPage(
-				titlePanel("network app"),
-				splitLayout( 
-						wellPanel(width=12, 
-								tabsetPanel(
-										tabPanel('Data',
-												fluidRow(
-														column(12,
-																wellPanel(
-																		h3('Choose a dataset'),
-																		selectInput('dataset',
-																				label = 'Sample datasets',
-																				c(Choose = '', 'ecoli1', 'ecoli2', 'faux.mesa.high',
-																						'fauxhigh', 'flobusiness','flomarriage',
-																						'kapferer','kapferer2','samplike'),
-																				selectize = FALSE),
-																		br(),
-																		actionButton('goButton', 'Run')))
-												)),
-										tabPanel('Generic',
-												fluidRow(
-														column(12,
-																wellPanel(
-																		chooserInput("mychooser_generic", "Available arguments", "Selected 
-																						metric",generic.arg.vec(), c(), size = 10, multiple = TRUE
-																		)),
+    titlePanel("network app"),
+    splitLayout( 
+      wellPanel(width=12, 
+        tabsetPanel(
+          tabPanel('Data',
+            fluidRow(
+              column(12,
+                wellPanel(
+                  h3('Choose a dataset'),
+                  selectInput('dataset',
+                    label = 'Sample datasets',
+                    c(Choose = '', 'ecoli1', 'ecoli2', 'faux.mesa.high',
+                      'fauxhigh', 'flobusiness','flomarriage',
+                      'kapferer','kapferer2','samplike'),
+                    selectize = FALSE),
+                  br(),
+                  actionButton('goButton', 'Run')))
+            )),
+          tabPanel('Generic',
+            fluidRow(
+              column(12,
+                wellPanel(
+                  chooserInput("mychooser_generic", "Available arguments", "Selected 
+                      metric",generic.arg.vec(), c(), size = 10, multiple = TRUE
+                  )),
                 h3("Parameter Value"),
 #																wellPanel(
-                  column(5,
-																		UI_G1("generic")),
-                  column(1),
-                  column(6,
-                    verbatimTextOutput("exp_generic"))# written in function.R
-																)
-														)),
-										tabPanel('Layout',
-												fluidRow(
+                column(5,
+                  UI_G1("generic")),
+                column(1),
+                column(6,
+                  verbatimTextOutput("exp_generic"))# written in function.R
+              )
+            )),
+          tabPanel('Layout',
+            fluidRow(
               column(12,
                 wellPanel(
                   chooserInput("mychooser_layout", "Available arguments", "Selected 
@@ -75,8 +77,8 @@ shinyUI(fluidPage(
                   verbatimTextOutput("exp_layout"))# written in function.R
               )
             )),									
-										tabPanel('Vertex',
-												fluidRow(
+          tabPanel('Vertex',
+            fluidRow(
               column(12,
                 wellPanel(
                   chooserInput("mychooser_vertex", "Available arguments", "Selected 
@@ -91,8 +93,8 @@ shinyUI(fluidPage(
                   verbatimTextOutput("exp_vertex"))# written in function.R
               )
             )),
-										tabPanel('Edge',
-												fluidRow(
+          tabPanel('Edge',
+            fluidRow(
               column(12,
                 wellPanel(
                   chooserInput("mychooser_edge", "Available arguments", "Selected 
@@ -144,26 +146,26 @@ shinyUI(fluidPage(
 #              
 #              )
 #            )),
-								)),
-              
-						wellPanel(   
-								h4('Console Message'),
-								verbatimTextOutput('console'),	  
-								h4('Network Plot'),
-								plotOutput('nwplot'),
-								h4('Network Summary'),
-								uiOutput("attrUI"),
+        )),
+      
+      wellPanel(   
+        h4('Console Message'),
+        verbatimTextOutput('console'),	  
+        h4('Network Plot'),
+        plotOutput('nwplot'),
+        h4('Network Summary'),
+        uiOutput("attrUI"),
         uiOutput("servertest"),
         h4('Diagnose Message'),
         verbatimTextOutput('diag'),
         downloadLink('downloadData', 'Download'))
-				),
-				
-				fluidRow(
-						column(1, img(src = 'csdelogo_crop.png', height = 50, width = 50)),
-						column(2, h6('Center for Studies in Demography and Ecology'))
-				)
-		)
+    ),
+    
+    fluidRow(
+      column(1, img(src = 'csdelogo_crop.png', height = 50, width = 50)),
+      column(2, h6('Center for Studies in Demography and Ecology'))
+    )
+  )
 )
 
 

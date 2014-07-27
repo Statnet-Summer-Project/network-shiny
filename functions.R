@@ -3,7 +3,8 @@
 # Author: kirk
 ###############################################################################
 
-library(statnet)
+library(network)
+library(ergm)
 library(shinyData)
 ########Jul 18, 2014######## Server function ########
 network.arg.vec <- function()names(formals(plot.network.default))
