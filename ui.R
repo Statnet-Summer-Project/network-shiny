@@ -26,15 +26,58 @@ customTextInput<-function (inputId, label, value="",...) {
      value=value,...))
 }
 
+
+# This function generates the client-side HTML for a helper button
+helperButton <- function(id) {
+  tagList(
+    tags$button(id=id, type="button", class="helper-btn",
+                tags$img(src= "200px-Icon-round-Question_mark.svg.png",
+                         height = 20, width = 20))
+  )
+}
+
+
 shinyUI(fluidPage(
     titlePanel("network app"),
     splitLayout( 
       wellPanel(width=12, 
         tabsetPanel(
+          
+          
+     #     bootstrapPage(title='statnet - ergm app',
+      #                  navbarPage(title=div(a(span('statnet  ', style='font-family:Courier'),
+       #                                        href = 'https://statnet.csde.washington.edu/trac',
+        #                                       target = '_blank'),HTML('&nbsp;&nbsp;'), 'ergm app'),
+                 
           tabPanel('Data',
             fluidRow(
               column(12,
                 wellPanel(
+                  
+                  h3('Upload own files'),
+                  fileInput('file1', 'Choose relation file to upload',
+                            accept = c(
+                              'text/csv',
+                              'text/comma-separated-values',
+                              'text/tab-separated-values',
+                              'text/plain',
+                              '.csv',
+                              '.tsv'
+                            )
+                  ),
+                  fileInput('file2', 'Choose Vertex file to upload',
+                            accept = c(
+                              'text/csv',
+                              'text/comma-separated-values',
+                              'text/tab-separated-values',
+                              'text/plain',
+                              '.csv',
+                              '.tsv'
+                            )
+                  ),
+                  tags$hr(),
+                  
+                  
                   h3('Choose a dataset'),
                   selectInput('dataset',
                     label = 'Sample datasets',
@@ -108,7 +151,13 @@ shinyUI(fluidPage(
                 column(6,
                   verbatimTextOutput("exp_edge"))# written in function.R
               )
-            ))
+            )),
+
+
+          # tabPanel('Help',htmlOutput("help",inline=FALSE))
+
+tabPanel('Help',htmlOutput("help1",inline=FALSE),hr(),htmlOutput("help2",inline=FALSE))
+
 #          tabPanel('Graphical Parameter Type 1',
 #            fluidRow(
 #              column(4,

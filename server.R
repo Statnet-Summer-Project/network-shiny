@@ -21,11 +21,72 @@ shinyServer(
    data(plotnetworkExp)
    
    
+   output$text <- renderPrint({
+     if(is.null(input$file1) & input$dataset)
+       cat("Please load data.\n")
+     else {
+       if(!is.null(input$file1)) cat("here is the data:\n")
+     }
+   })
+   
+   output$summary <- renderDataTable({
+     if(!input$dataset) {
+       
+     }
+   }) 
+   
+   dataRe <- reactive({
+     # input$file1 will be NULL initially. After the user selects
+     # and uploads a file, it will be a data frame with 'name',
+     # 'size', 'type', and 'datapath' columns. The 'datapath'
+     # column will contain the local filenames where the data can
+     # be found.
+     inFile <- input$file1    
+     if (is.null(inFile))
+       return(NULL)
+     read.csv(inFile$datapath,header=FALSE,stringsAsFactors=FALSE)    
+   })
+   
+   # input the vertex
+   dataVertex <- reactive({
+     inFile <- input$file2    
+     if (is.null(inFile))
+       return(NULL)
+     read.csv(inFile$datapath,header=FALSE,stringsAsFactors=FALSE)
+   })
+   
+   upload.nw <- reactive({
+     relations <- as.matrix(dataRe())
+     nodeInfo <- dataVertex()
+     rownames(relations) <- nodeInfo$name
+     colnames(relations) <- nodeInfo$name
+     nrelations <- network(relations,directed=FALSE)
+     #network.vertex.names(nrelations)
+   })
+   
+   
+   #   upload.nw <- reactive({
+   #     dataVertex <- read.csv("vertexAttributes.csv",header=FALSE,stringsAsFactors=FALSE)
+   #     dataRe <- read.csv("relationalData.csv",header=FALSE,stringsAsFactors=FALSE)
+   #     relations <- as.matrix(dataRe)
+   #     nodeInfo <- dataVertex
+   #     rownames(relations) <- nodeInfo$name
+   #     colnames(relations) <- nodeInfo$name
+   #     nrelations <- network(relations,directed=FALSE)
+   #     
+   #   })
+   # Get the choosen network data from nw. 
    nw.reac <- reactive({
-      if(input$goButton==0)return()
-      input$goButton
-      isolate(eval(parse(text = input$dataset)))
-     })
+     inFile <- input$file1
+     if(!is.null(inFile)) {
+       plot(upload.nw())
+       upload.nw()
+     } else{
+       if(input$goButton==0)return()  
+       input$goButton
+       isolate(eval(parse(text = input$dataset)))}
+   })
+
    #number of nodes in nw
    nodes <- reactive({
       if(input$goButton==0)return()
@@ -401,6 +462,28 @@ shinyServer(
 #      nw <- isolate(nw.reac())
 #      return(nw)
 #     })
+
+#output$help <- renderUI ({
+
+ # div(a(span('statnet  ', style='font-family:Courier'),
+  #      href = 'https://statnet.csde.washington.edu/trac',
+   #     target = '_blank'),HTML('&nbsp;&nbsp;'),
+      
+    #  a(span('network  ', style='font-family:Courier'),
+     #   href = 'http://cran.r-project.org/web/packages/network/index.html',
+      #  target = '_blank'),HTML('&nbsp;&nbsp;'))
+  output$help1 <- renderUI ({
+    div(a(span('statnet  ', style='font-family:Courier'),
+          href = 'https://statnet.csde.washington.edu/trac',
+          target = '_blank'),HTML('&nbsp;&nbsp;'))
+  })
+
+  output$help2 <- renderUI ({
+    div(a(span('network  ', style='font-family:Courier'),
+          href = 'http://cran.r-project.org/web/packages/network/index.html',
+          target = '_blank'),HTML('&nbsp;&nbsp;'))   
+  })      
+
    
    output$downloadData<- downloadHandler(
      filename = function() {
